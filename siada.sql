@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.0.2
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2015 at 05:06 
--- Server version: 10.0.17-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: May 10, 2017 at 04:28 am
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pesantren`
+-- Database: `siada`
 --
 
 -- --------------------------------------------------------
@@ -32,18 +32,17 @@ CREATE TABLE `data_kamar` (
   `keadaan_kamar` varchar(100) NOT NULL,
   `kapasitas` int(11) NOT NULL,
   `penghuni_sekarang` int(11) NOT NULL,
-  `jumlah_lemari` int(11) NOT NULL
+  `jumlah_lemari` int(11) NOT NULL,
+  `id_kamar` int(11) NOT NULL,
+  `id_komplek` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `data_kamar`
 --
 
-INSERT INTO `data_kamar` (`nama_komplek`, `nama_kamar`, `keadaan_kamar`, `kapasitas`, `penghuni_sekarang`, `jumlah_lemari`) VALUES
-('Abu Bakar', 'aa2', 'Kurang Baik', 20, 11, 18),
-('Abu Bakar', 'B3', 'Sangat Baik', 15, 18, 10),
-('Abu Bakar', 'aa2', 'Kurang Baik', 20, 11, 18),
-('Abu Bakar', 'B3', 'Sangat Baik', 15, 18, 10);
+INSERT INTO `data_kamar` (`nama_komplek`, `nama_kamar`, `keadaan_kamar`, `kapasitas`, `penghuni_sekarang`, `jumlah_lemari`, `id_kamar`, `id_komplek`) VALUES
+('Abu Bakar', 'B3', 'Sangat Baik', 15, 18, 10, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -54,18 +53,17 @@ INSERT INTO `data_kamar` (`nama_komplek`, `nama_kamar`, `keadaan_kamar`, `kapasi
 CREATE TABLE `data_komplek` (
   `nama_komplek` varchar(100) NOT NULL,
   `ketua_komplek` varchar(100) NOT NULL,
-  `bendahara_komplek` varchar(100) NOT NULL
+  `bendahara_komplek` varchar(100) NOT NULL,
+  `id_komplek` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `data_komplek`
 --
 
-INSERT INTO `data_komplek` (`nama_komplek`, `ketua_komplek`, `bendahara_komplek`) VALUES
-('Abu Bakar', 'Ahmad Al Fatih', 'Hasan Ali'),
-('Sholawat', 'Sholehuddin', 'Ni''am Al Fajar'),
-('Abu Bakar', 'Ahmad Al Fatih', 'Hasan Ali'),
-('Sholawat', 'Sholehuddin', 'Ni''am Al Fajar');
+INSERT INTO `data_komplek` (`nama_komplek`, `ketua_komplek`, `bendahara_komplek`, `id_komplek`) VALUES
+('Abu Bakar', 'Ahmad Al Fatih', 'Hasan Ali', 1),
+('Sholawat', 'Sholehuddin', 'Ni\'am Al Fajar', 2);
 
 -- --------------------------------------------------------
 
@@ -84,503 +82,6 @@ CREATE TABLE `kabkot` (
 --
 
 INSERT INTO `kabkot` (`id_prov`, `id_kabkot`, `nama_kabkot`) VALUES
-(11, 1101, 'Kabupaten Simeulue\r'),
-(11, 1102, 'Kabupaten Aceh Singkil\r'),
-(11, 1103, 'Kabupaten Aceh Selatan\r'),
-(11, 1104, 'Kabupaten Aceh Tenggara\r'),
-(11, 1105, 'Kabupaten Aceh Timur\r'),
-(11, 1106, 'Kabupaten Aceh Tengah\r'),
-(11, 1107, 'Kabupaten Aceh Barat\r'),
-(11, 1108, 'Kabupaten Aceh Besar\r'),
-(11, 1109, 'Kabupaten Pidie\r'),
-(11, 1110, 'Kabupaten Bireuen\r'),
-(11, 1111, 'Kabupaten Aceh Utara\r'),
-(11, 1112, 'Kabupaten Aceh Barat Daya\r'),
-(11, 1113, 'Kabupaten Gayo Lues\r'),
-(11, 1114, 'Kabupaten Aceh Tamiang\r'),
-(11, 1115, 'Kabupaten Nagan Raya\r'),
-(11, 1116, 'Kabupaten Aceh Jaya\r'),
-(11, 1117, 'Kabupaten Bener Meriah\r'),
-(11, 1118, 'Kabupaten Pidie Jaya\r'),
-(11, 1171, 'Kota Banda Aceh\r'),
-(11, 1172, 'Kota Sabang\r'),
-(11, 1173, 'Kota Langsa\r'),
-(11, 1174, 'Kota Lhokseumawe\r'),
-(11, 1175, 'Kota Subulussalam\r'),
-(12, 1201, 'Kabupaten Nias\r'),
-(12, 1202, 'Kabupaten Mandailing Natal\r'),
-(12, 1203, 'Kabupaten Tapanuli Selatan\r'),
-(12, 1204, 'Kabupaten Tapanuli Tengah\r'),
-(12, 1205, 'Kabupaten Tapanuli Utara\r'),
-(12, 1206, 'Kabupaten Toba Samosir\r'),
-(12, 1207, 'Kabupaten Labuhan Batu\r'),
-(12, 1208, 'Kabupaten Asahan\r'),
-(12, 1209, 'Kabupaten Simalungun\r'),
-(12, 1210, 'Kabupaten Dairi\r'),
-(12, 1211, 'Kabupaten Karo\r'),
-(12, 1212, 'Kabupaten Deli Serdang\r'),
-(12, 1213, 'Kabupaten Langkat\r'),
-(12, 1214, 'Kabupaten Nias Selatan\r'),
-(12, 1215, 'Kabupaten Humbang Hasundutan\r'),
-(12, 1216, 'Kabupaten Pakpak Bharat\r'),
-(12, 1217, 'Kabupaten Samosir\r'),
-(12, 1218, 'Kabupaten Serdang Bedagai\r'),
-(12, 1219, 'Kabupaten Batu Bara\r'),
-(12, 1220, 'Kabupaten Padang Lawas Utara\r'),
-(12, 1221, 'Kabupaten Padang Lawas\r'),
-(12, 1222, 'Kabupaten Labuhan Batu Selatan\r'),
-(12, 1223, 'Kabupaten Labuhan Batu Utara\r'),
-(12, 1224, 'Kabupaten Nias Utara\r'),
-(12, 1225, 'Kabupaten Nias Barat\r'),
-(12, 1271, 'Kota Sibolga\r'),
-(12, 1272, 'Kota Tanjung Balai\r'),
-(12, 1273, 'Kota Pematang Siantar\r'),
-(12, 1274, 'Kota Tebing Tinggi\r'),
-(12, 1275, 'Kota Medan\r'),
-(12, 1276, 'Kota Binjai\r'),
-(12, 1277, 'Kota Padangsidimpuan\r'),
-(12, 1278, 'Kota Gunungsitoli\r'),
-(13, 1301, 'Kabupaten Kepulauan Mentawai\r'),
-(13, 1302, 'Kabupaten Pesisir Selatan\r'),
-(13, 1303, 'Kabupaten Solok\r'),
-(13, 1304, 'Kabupaten Sijunjung\r'),
-(13, 1305, 'Kabupaten Tanah Datar\r'),
-(13, 1306, 'Kabupaten Padang Pariaman\r'),
-(13, 1307, 'Kabupaten Agam\r'),
-(13, 1308, 'Kabupaten Lima Puluh Kota\r'),
-(13, 1309, 'Kabupaten Pasaman\r'),
-(13, 1310, 'Kabupaten Solok Selatan\r'),
-(13, 1311, 'Kabupaten Dharmasraya\r'),
-(13, 1312, 'Kabupaten Pasaman Barat\r'),
-(13, 1371, 'Kota Padang\r'),
-(13, 1372, 'Kota Solok\r'),
-(13, 1373, 'Kota Sawah Lunto\r'),
-(13, 1374, 'Kota Padang Panjang\r'),
-(13, 1375, 'Kota Bukittinggi\r'),
-(13, 1376, 'Kota Payakumbuh\r'),
-(13, 1377, 'Kota Pariaman\r'),
-(14, 1401, 'Kabupaten Kuantan Singingi\r'),
-(14, 1402, 'Kabupaten Indragiri Hulu\r'),
-(14, 1403, 'Kabupaten Indragiri Hilir\r'),
-(14, 1404, 'Kabupaten Pelalawan\r'),
-(14, 1405, 'Kabupaten S I A K\r'),
-(14, 1406, 'Kabupaten Kampar\r'),
-(14, 1407, 'Kabupaten Rokan Hulu\r'),
-(14, 1408, 'Kabupaten Bengkalis\r'),
-(14, 1409, 'Kabupaten Rokan Hilir\r'),
-(14, 1410, 'Kabupaten Kepulauan Meranti\r'),
-(14, 1471, 'Kota Pekanbaru\r'),
-(14, 1473, 'Kota D U M A I\r'),
-(15, 1501, 'Kabupaten Kerinci\r'),
-(15, 1502, 'Kabupaten Merangin\r'),
-(15, 1503, 'Kabupaten Sarolangun\r'),
-(15, 1504, 'Kabupaten Batang Hari\r'),
-(15, 1505, 'Kabupaten Muaro Jambi\r'),
-(15, 1506, 'Kabupaten Tanjung Jabung Timur\r'),
-(15, 1507, 'Kabupaten Tanjung Jabung Barat\r'),
-(15, 1508, 'Kabupaten Tebo\r'),
-(15, 1509, 'Kabupaten Bungo\r'),
-(15, 1571, 'Kota Jambi\r'),
-(15, 1572, 'Kota Sungai Penuh\r'),
-(16, 1601, 'Kabupaten Ogan Komering Ulu\r'),
-(16, 1602, 'Kabupaten Ogan Komering Ilir\r'),
-(16, 1603, 'Kabupaten Muara Enim\r'),
-(16, 1604, 'Kabupaten Lahat\r'),
-(16, 1605, 'Kabupaten Musi Rawas\r'),
-(16, 1606, 'Kabupaten Musi Banyuasin\r'),
-(16, 1607, 'Kabupaten Banyu Asin\r'),
-(16, 1608, 'Kabupaten Ogan Komering Ulu Selatan\r'),
-(16, 1609, 'Kabupaten Ogan Komering Ulu Timur\r'),
-(16, 1610, 'Kabupaten Ogan Ilir\r'),
-(16, 1611, 'Kabupaten Empat Lawang\r'),
-(16, 1671, 'Kota Palembang\r'),
-(16, 1672, 'Kota Prabumulih\r'),
-(16, 1673, 'Kota Pagar Alam\r'),
-(16, 1674, 'Kota Lubuklinggau\r'),
-(17, 1701, 'Kabupaten Bengkulu Selatan\r'),
-(17, 1702, 'Kabupaten Rejang Lebong\r'),
-(17, 1703, 'Kabupaten Bengkulu Utara\r'),
-(17, 1704, 'Kabupaten Kaur\r'),
-(17, 1705, 'Kabupaten Seluma\r'),
-(17, 1706, 'Kabupaten Mukomuko\r'),
-(17, 1707, 'Kabupaten Lebong\r'),
-(17, 1708, 'Kabupaten Kepahiang\r'),
-(17, 1709, 'Kabupaten Bengkulu Tengah\r'),
-(17, 1771, 'Kota Bengkulu\r'),
-(18, 1801, 'Kabupaten Lampung Barat\r'),
-(18, 1802, 'Kabupaten Tanggamus\r'),
-(18, 1803, 'Kabupaten Lampung Selatan\r'),
-(18, 1804, 'Kabupaten Lampung Timur\r'),
-(18, 1805, 'Kabupaten Lampung Tengah\r'),
-(18, 1806, 'Kabupaten Lampung Utara\r'),
-(18, 1807, 'Kabupaten Way Kanan\r'),
-(18, 1808, 'Kabupaten Tulangbawang\r'),
-(18, 1809, 'Kabupaten Pesawaran\r'),
-(18, 1810, 'Kabupaten Pringsewu\r'),
-(18, 1811, 'Kabupaten Mesuji\r'),
-(18, 1812, 'Kabupaten Tulang Bawang Barat\r'),
-(18, 1871, 'Kota Bandar Lampung\r'),
-(18, 1872, 'Kota Metro\r'),
-(19, 1901, 'Kabupaten Bangka\r'),
-(19, 1902, 'Kabupaten Belitung\r'),
-(19, 1903, 'Kabupaten Bangka Barat\r'),
-(19, 1904, 'Kabupaten Bangka Tengah\r'),
-(19, 1905, 'Kabupaten Bangka Selatan\r'),
-(19, 1906, 'Kabupaten Belitung Timur\r'),
-(19, 1971, 'Kota Pangkal Pinang\r'),
-(21, 2101, 'Kabupaten Karimun\r'),
-(21, 2102, 'Kabupaten Bintan\r'),
-(21, 2103, 'Kabupaten Natuna\r'),
-(21, 2104, 'Kabupaten Lingga\r'),
-(21, 2105, 'Kabupaten Kepulauan Anambas\r'),
-(21, 2171, 'Kota B A T A M\r'),
-(21, 2172, 'Kota Tanjung Pinang\r'),
-(31, 3101, 'Kabupaten Kepulauan Seribu\r'),
-(31, 3171, 'Kota Jakarta Selatan\r'),
-(31, 3172, 'Kota Jakarta Timur\r'),
-(31, 3173, 'Kota Jakarta Pusat\r'),
-(31, 3174, 'Kota Jakarta Barat\r'),
-(31, 3175, 'Kota Jakarta Utara\r'),
-(32, 3201, 'Kabupaten Bogor\r'),
-(32, 3202, 'Kabupaten Sukabumi\r'),
-(32, 3203, 'Kabupaten Cianjur\r'),
-(32, 3204, 'Kabupaten Bandung\r'),
-(32, 3205, 'Kabupaten Garut\r'),
-(32, 3206, 'Kabupaten Tasikmalaya\r'),
-(32, 3207, 'Kabupaten Ciamis\r'),
-(32, 3208, 'Kabupaten Kuningan\r'),
-(32, 3209, 'Kabupaten Cirebon\r'),
-(32, 3210, 'Kabupaten Majalengka\r'),
-(32, 3211, 'Kabupaten Sumedang\r'),
-(32, 3212, 'Kabupaten Indramayu\r'),
-(32, 3213, 'Kabupaten Subang\r'),
-(32, 3214, 'Kabupaten Purwakarta\r'),
-(32, 3215, 'Kabupaten Karawang\r'),
-(32, 3216, 'Kabupaten Bekasi\r'),
-(32, 3217, 'Kabupaten Bandung Barat\r'),
-(32, 3271, 'Kota Bogor\r'),
-(32, 3272, 'Kota Sukabumi\r'),
-(32, 3273, 'Kota Bandung\r'),
-(32, 3274, 'Kota Cirebon\r'),
-(32, 3275, 'Kota Bekasi\r'),
-(32, 3276, 'Kota Depok\r'),
-(32, 3277, 'Kota Cimahi\r'),
-(32, 3278, 'Kota Tasikmalaya\r'),
-(32, 3279, 'Kota Banjar\r'),
-(33, 3301, 'Kabupaten Cilacap\r'),
-(33, 3302, 'Kabupaten Banyumas\r'),
-(33, 3303, 'Kabupaten Purbalingga\r'),
-(33, 3304, 'Kabupaten Banjarnegara\r'),
-(33, 3305, 'Kabupaten Kebumen\r'),
-(33, 3306, 'Kabupaten Purworejo\r'),
-(33, 3307, 'Kabupaten Wonosobo\r'),
-(33, 3308, 'Kabupaten Magelang\r'),
-(33, 3309, 'Kabupaten Boyolali\r'),
-(33, 3310, 'Kabupaten Klaten\r'),
-(33, 3311, 'Kabupaten Sukoharjo\r'),
-(33, 3312, 'Kabupaten Wonogiri\r'),
-(33, 3313, 'Kabupaten Karanganyar\r'),
-(33, 3314, 'Kabupaten Sragen\r'),
-(33, 3315, 'Kabupaten Grobogan\r'),
-(33, 3316, 'Kabupaten Blora\r'),
-(33, 3317, 'Kabupaten Rembang\r'),
-(33, 3318, 'Kabupaten Pati\r'),
-(33, 3319, 'Kabupaten Kudus\r'),
-(33, 3320, 'Kabupaten Jepara\r'),
-(33, 3321, 'Kabupaten Demak\r'),
-(33, 3322, 'Kabupaten Semarang\r'),
-(33, 3323, 'Kabupaten Temanggung\r'),
-(33, 3324, 'Kabupaten Kendal\r'),
-(33, 3325, 'Kabupaten Batang\r'),
-(33, 3326, 'Kabupaten Pekalongan\r'),
-(33, 3327, 'Kabupaten Pemalang\r'),
-(33, 3328, 'Kabupaten Tegal\r'),
-(33, 3329, 'Kabupaten Brebes\r'),
-(33, 3371, 'Kota Magelang\r'),
-(33, 3372, 'Kota Surakarta\r'),
-(33, 3373, 'Kota Salatiga\r'),
-(33, 3374, 'Kota Semarang\r'),
-(33, 3375, 'Kota Pekalongan\r'),
-(33, 3376, 'Kota Tegal\r'),
-(34, 3401, 'Kabupaten Kulon Progo\r'),
-(34, 3402, 'Kabupaten Bantul\r'),
-(34, 3403, 'Kabupaten Gunung Kidul\r'),
-(34, 3404, 'Kabupaten Sleman\r'),
-(34, 3471, 'Kota Yogyakarta\r'),
-(35, 3501, 'Kabupaten Pacitan\r'),
-(35, 3502, 'Kabupaten Ponorogo\r'),
-(35, 3503, 'Kabupaten Trenggalek\r'),
-(35, 3504, 'Kabupaten Tulungagung\r'),
-(35, 3505, 'Kabupaten Blitar\r'),
-(35, 3506, 'Kabupaten Kediri\r'),
-(35, 3507, 'Kabupaten Malang\r'),
-(35, 3508, 'Kabupaten Lumajang\r'),
-(35, 3509, 'Kabupaten Jember\r'),
-(35, 3510, 'Kabupaten Banyuwangi\r'),
-(35, 3511, 'Kabupaten Bondowoso\r'),
-(35, 3512, 'Kabupaten Situbondo\r'),
-(35, 3513, 'Kabupaten Probolinggo\r'),
-(35, 3514, 'Kabupaten Pasuruan\r'),
-(35, 3515, 'Kabupaten Sidoarjo\r'),
-(35, 3516, 'Kabupaten Mojokerto\r'),
-(35, 3517, 'Kabupaten Jombang\r'),
-(35, 3518, 'Kabupaten Nganjuk\r'),
-(35, 3519, 'Kabupaten Madiun\r'),
-(35, 3520, 'Kabupaten Magetan\r'),
-(35, 3521, 'Kabupaten Ngawi\r'),
-(35, 3522, 'Kabupaten Bojonegoro\r'),
-(35, 3523, 'Kabupaten Tuban\r'),
-(35, 3524, 'Kabupaten Lamongan\r'),
-(35, 3525, 'Kabupaten Gresik\r'),
-(35, 3526, 'Kabupaten Bangkalan\r'),
-(35, 3527, 'Kabupaten Sampang\r'),
-(35, 3528, 'Kabupaten Pamekasan\r'),
-(35, 3529, 'Kabupaten Sumenep\r'),
-(35, 3571, 'Kota Kediri\r'),
-(35, 3572, 'Kota Blitar\r'),
-(35, 3573, 'Kota Malang\r'),
-(35, 3574, 'Kota Probolinggo\r'),
-(35, 3575, 'Kota Pasuruan\r'),
-(35, 3576, 'Kota Mojokerto\r'),
-(35, 3577, 'Kota Madiun\r'),
-(35, 3578, 'Kota Surabaya\r'),
-(35, 3579, 'Kota Batu\r'),
-(36, 3601, 'Kabupaten Pandeglang\r'),
-(36, 3602, 'Kabupaten Lebak\r'),
-(36, 3603, 'Kabupaten Tangerang\r'),
-(36, 3604, 'Kabupaten Serang\r'),
-(36, 3671, 'Kota Tangerang\r'),
-(36, 3672, 'Kota Cilegon\r'),
-(36, 3673, 'Kota Serang\r'),
-(36, 3674, 'Kota Tangerang Selatan\r'),
-(51, 5101, 'Kabupaten Jembrana\r'),
-(51, 5102, 'Kabupaten Tabanan\r'),
-(51, 5103, 'Kabupaten Badung\r'),
-(51, 5104, 'Kabupaten Gianyar\r'),
-(51, 5105, 'Kabupaten Klungkung\r'),
-(51, 5106, 'Kabupaten Bangli\r'),
-(51, 5107, 'Kabupaten Karang Asem\r'),
-(51, 5108, 'Kabupaten Buleleng\r'),
-(51, 5171, 'Kota Denpasar\r'),
-(52, 5201, 'Kabupaten Lombok Barat\r'),
-(52, 5202, 'Kabupaten Lombok Tengah\r'),
-(52, 5203, 'Kabupaten Lombok Timur\r'),
-(52, 5204, 'Kabupaten Sumbawa\r'),
-(52, 5205, 'Kabupaten Dompu\r'),
-(52, 5206, 'Kabupaten Bima\r'),
-(52, 5207, 'Kabupaten Sumbawa Barat\r'),
-(52, 5208, 'Kabupaten Lombok Utara\r'),
-(52, 5271, 'Kota Mataram\r'),
-(52, 5272, 'Kota Bima\r'),
-(53, 5301, 'Kabupaten Sumba Barat\r'),
-(53, 5302, 'Kabupaten Sumba Timur\r'),
-(53, 5303, 'Kabupaten Kupang\r'),
-(53, 5304, 'Kabupaten Timor Tengah Selatan\r'),
-(53, 5305, 'Kabupaten Timor Tengah Utara\r'),
-(53, 5306, 'Kabupaten Belu\r'),
-(53, 5307, 'Kabupaten Alor\r'),
-(53, 5308, 'Kabupaten Lembata\r'),
-(53, 5309, 'Kabupaten Flores Timur\r'),
-(53, 5310, 'Kabupaten Sikka\r'),
-(53, 5311, 'Kabupaten Ende\r'),
-(53, 5312, 'Kabupaten Ngada\r'),
-(53, 5313, 'Kabupaten Manggarai\r'),
-(53, 5314, 'Kabupaten Rote Ndao\r'),
-(53, 5315, 'Kabupaten Manggarai Barat\r'),
-(53, 5316, 'Kabupaten Sumba Tengah\r'),
-(53, 5317, 'Kabupaten Sumba Barat Daya\r'),
-(53, 5318, 'Kabupaten Nagekeo\r'),
-(53, 5319, 'Kabupaten Manggarai Timur\r'),
-(53, 5320, 'Kabupaten Sabu Raijua\r'),
-(53, 5371, 'Kota Kupang\r'),
-(61, 6101, 'Kabupaten Sambas\r'),
-(61, 6102, 'Kabupaten Bengkayang\r'),
-(61, 6103, 'Kabupaten Landak\r'),
-(61, 6104, 'Kabupaten Pontianak\r'),
-(61, 6105, 'Kabupaten Sanggau\r'),
-(61, 6106, 'Kabupaten Ketapang\r'),
-(61, 6107, 'Kabupaten Sintang\r'),
-(61, 6108, 'Kabupaten Kapuas Hulu\r'),
-(61, 6109, 'Kabupaten Sekadau\r'),
-(61, 6110, 'Kabupaten Melawi\r'),
-(61, 6111, 'Kabupaten Kayong Utara\r'),
-(61, 6112, 'Kabupaten Kubu Raya\r'),
-(61, 6171, 'Kota Pontianak\r'),
-(61, 6172, 'Kota Singkawang\r'),
-(62, 6201, 'Kabupaten Kotawaringin Barat\r'),
-(62, 6202, 'Kabupaten Kotawaringin Timur\r'),
-(62, 6203, 'Kabupaten Kapuas\r'),
-(62, 6204, 'Kabupaten Barito Selatan\r'),
-(62, 6205, 'Kabupaten Barito Utara\r'),
-(62, 6206, 'Kabupaten Sukamara\r'),
-(62, 6207, 'Kabupaten Lamandau\r'),
-(62, 6208, 'Kabupaten Seruyan\r'),
-(62, 6209, 'Kabupaten Katingan\r'),
-(62, 6210, 'Kabupaten Pulang Pisau\r'),
-(62, 6211, 'Kabupaten Gunung Mas\r'),
-(62, 6212, 'Kabupaten Barito Timur\r'),
-(62, 6213, 'Kabupaten Murung Raya\r'),
-(62, 6271, 'Kota Palangka Raya\r'),
-(63, 6301, 'Kabupaten Tanah Laut\r'),
-(63, 6302, 'Kabupaten Kota Baru\r'),
-(63, 6303, 'Kabupaten Banjar\r'),
-(63, 6304, 'Kabupaten Barito Kuala\r'),
-(63, 6305, 'Kabupaten Tapin\r'),
-(63, 6306, 'Kabupaten Hulu Sungai Selatan\r'),
-(63, 6307, 'Kabupaten Hulu Sungai Tengah\r'),
-(63, 6308, 'Kabupaten Hulu Sungai Utara\r'),
-(63, 6309, 'Kabupaten Tabalong\r'),
-(63, 6310, 'Kabupaten Tanah Bumbu\r'),
-(63, 6311, 'Kabupaten Balangan\r'),
-(63, 6371, 'Kota Banjarmasin\r'),
-(63, 6372, 'Kota Banjar Baru\r'),
-(64, 6401, 'Kabupaten Paser\r'),
-(64, 6402, 'Kabupaten Kutai Barat\r'),
-(64, 6403, 'Kabupaten Kutai Kartanegara\r'),
-(64, 6404, 'Kabupaten Kutai Timur\r'),
-(64, 6405, 'Kabupaten Berau\r'),
-(64, 6406, 'Kabupaten Malinau\r'),
-(64, 6407, 'Kabupaten Bulungan\r'),
-(64, 6408, 'Kabupaten Nunukan\r'),
-(64, 6409, 'Kabupaten Penajam Paser Utara\r'),
-(64, 6410, 'Kabupaten Tana Tidung\r'),
-(64, 6471, 'Kota Balikpapan\r'),
-(64, 6472, 'Kota Samarinda\r'),
-(64, 6473, 'Kota Tarakan\r'),
-(64, 6474, 'Kota Bontang\r'),
-(71, 7101, 'Kabupaten Bolaang Mongondow\r'),
-(71, 7102, 'Kabupaten Minahasa\r'),
-(71, 7103, 'Kabupaten Kepulauan Sangihe\r'),
-(71, 7104, 'Kabupaten Kepulauan Talaud\r'),
-(71, 7105, 'Kabupaten Minahasa Selatan\r'),
-(71, 7106, 'Kabupaten Minahasa Utara\r'),
-(71, 7107, 'Kabupaten Bolaang Mongondow Utara\r'),
-(71, 7108, 'Kabupaten Siau Tagulandang Biaro\r'),
-(71, 7109, 'Kabupaten Minahasa Tenggara\r'),
-(71, 7110, 'Kabupaten Bolaang Mongondow Selatan\r'),
-(71, 7111, 'Kabupaten Bolaang Mongondow Timur\r'),
-(71, 7171, 'Kota Manado\r'),
-(71, 7172, 'Kota Bitung\r'),
-(71, 7173, 'Kota Tomohon\r'),
-(71, 7174, 'Kota Kotamobagu\r'),
-(72, 7201, 'Kabupaten Banggai Kepulauan\r'),
-(72, 7202, 'Kabupaten Banggai\r'),
-(72, 7203, 'Kabupaten Morowali\r'),
-(72, 7204, 'Kabupaten Poso\r'),
-(72, 7205, 'Kabupaten Donggala\r'),
-(72, 7206, 'Kabupaten Toli-Toli\r'),
-(72, 7207, 'Kabupaten Buol\r'),
-(72, 7208, 'Kabupaten Parigi Moutong\r'),
-(72, 7209, 'Kabupaten Tojo Una-Una\r'),
-(72, 7210, 'Kabupaten Sigi\r'),
-(72, 7271, 'Kota Palu\r'),
-(73, 7301, 'Kabupaten Kepulauan Selayar\r'),
-(73, 7302, 'Kabupaten Bulukumba\r'),
-(73, 7303, 'Kabupaten Bantaeng\r'),
-(73, 7304, 'Kabupaten Jeneponto\r'),
-(73, 7305, 'Kabupaten Takalar\r'),
-(73, 7306, 'Kabupaten Gowa\r'),
-(73, 7307, 'Kabupaten Sinjai\r'),
-(73, 7308, 'Kabupaten Maros\r'),
-(73, 7309, 'Kabupaten Pangkajene Dan Kepulauan\r'),
-(73, 7310, 'Kabupaten Barru\r'),
-(73, 7311, 'Kabupaten Bone\r'),
-(73, 7312, 'Kabupaten Soppeng\r'),
-(73, 7313, 'Kabupaten Wajo\r'),
-(73, 7314, 'Kabupaten Sidenreng Rappang\r'),
-(73, 7315, 'Kabupaten Pinrang\r'),
-(73, 7316, 'Kabupaten Enrekang\r'),
-(73, 7317, 'Kabupaten Luwu\r'),
-(73, 7318, 'Kabupaten Tana Toraja\r'),
-(73, 7322, 'Kabupaten Luwu Utara\r'),
-(73, 7325, 'Kabupaten Luwu Timur\r'),
-(73, 7326, 'Kabupaten Toraja Utara\r'),
-(73, 7371, 'Kota Makassar\r'),
-(73, 7372, 'Kota Pare-Pare\r'),
-(73, 7373, 'Kota Palopo\r'),
-(74, 7401, 'Kabupaten Buton\r'),
-(74, 7402, 'Kabupaten Muna\r'),
-(74, 7403, 'Kabupaten Konawe\r'),
-(74, 7404, 'Kabupaten Kolaka\r'),
-(74, 7405, 'Kabupaten Konawe Selatan\r'),
-(74, 7406, 'Kabupaten Bombana\r'),
-(74, 7407, 'Kabupaten Wakatobi\r'),
-(74, 7408, 'Kabupaten Kolaka Utara\r'),
-(74, 7409, 'Kabupaten Buton Utara\r'),
-(74, 7410, 'Kabupaten Konawe Utara\r'),
-(74, 7471, 'Kota Kendari\r'),
-(74, 7472, 'Kota Baubau\r'),
-(75, 7501, 'Kabupaten Boalemo\r'),
-(75, 7502, 'Kabupaten Gorontalo\r'),
-(75, 7503, 'Kabupaten Pohuwato\r'),
-(75, 7504, 'Kabupaten Bone Bolango\r'),
-(75, 7505, 'Kabupaten Gorontalo Utara\r'),
-(75, 7571, 'Kota Gorontalo\r'),
-(76, 7601, 'Kabupaten Majene\r'),
-(76, 7602, 'Kabupaten Polewali Mandar\r'),
-(76, 7603, 'Kabupaten Mamasa\r'),
-(76, 7604, 'Kabupaten Mamuju\r'),
-(76, 7605, 'Kabupaten Mamuju Utara\r'),
-(81, 8101, 'Kabupaten Maluku Tenggara Barat\r'),
-(81, 8102, 'Kabupaten Maluku Tenggara\r'),
-(81, 8103, 'Kabupaten Maluku Tengah\r'),
-(81, 8104, 'Kabupaten Buru\r'),
-(81, 8105, 'Kabupaten Kepulauan Aru\r'),
-(81, 8106, 'Kabupaten Seram Bagian Barat\r'),
-(81, 8107, 'Kabupaten Seram Bagian Timur\r'),
-(81, 8108, 'Kabupaten Maluku Barat Daya\r'),
-(81, 8109, 'Kabupaten Buru Selatan\r'),
-(81, 8171, 'Kota Ambon\r'),
-(81, 8172, 'Kota Tual\r'),
-(82, 8201, 'Kabupaten Halmahera Barat\r'),
-(82, 8202, 'Kabupaten Halmahera Tengah\r'),
-(82, 8203, 'Kabupaten Kepulauan Sula\r'),
-(82, 8204, 'Kabupaten Halmahera Selatan\r'),
-(82, 8205, 'Kabupaten Halmahera Utara\r'),
-(82, 8206, 'Kabupaten Halmahera Timur\r'),
-(82, 8207, 'Kabupaten Pulau Morotai\r'),
-(82, 8271, 'Kota Ternate\r'),
-(82, 8272, 'Kota Tidore Kepulauan\r'),
-(91, 9101, 'Kabupaten Fakfak\r'),
-(91, 9102, 'Kabupaten Kaimana\r'),
-(91, 9103, 'Kabupaten Teluk Wondama\r'),
-(91, 9104, 'Kabupaten Teluk Bintuni\r'),
-(91, 9105, 'Kabupaten Manokwari\r'),
-(91, 9106, 'Kabupaten Sorong Selatan\r'),
-(91, 9107, 'Kabupaten Sorong\r'),
-(91, 9108, 'Kabupaten Raja Ampat\r'),
-(91, 9109, 'Kabupaten Tambrauw\r'),
-(91, 9110, 'Kabupaten Maybrat\r'),
-(91, 9171, 'Kota Sorong\r'),
-(94, 9401, 'Kabupaten Merauke\r'),
-(94, 9402, 'Kabupaten Jayawijaya\r'),
-(94, 9403, 'Kabupaten Jayapura\r'),
-(94, 9404, 'Kabupaten Nabire\r'),
-(94, 9408, 'Kabupaten Kepulauan Yapen\r'),
-(94, 9409, 'Kabupaten Biak Numfor\r'),
-(94, 9410, 'Kabupaten Paniai\r'),
-(94, 9411, 'Kabupaten Puncak Jaya\r'),
-(94, 9412, 'Kabupaten Mimika\r'),
-(94, 9413, 'Kabupaten Boven Digoel\r'),
-(94, 9414, 'Kabupaten Mappi\r'),
-(94, 9415, 'Kabupaten Asmat\r'),
-(94, 9416, 'Kabupaten Yahukimo\r'),
-(94, 9417, 'Kabupaten Pegunungan Bintang\r'),
-(94, 9418, 'Kabupaten Tolikara\r'),
-(94, 9419, 'Kabupaten Sarmi\r'),
-(94, 9420, 'Kabupaten Keerom\r'),
-(94, 9426, 'Kabupaten Waropen\r'),
-(94, 9427, 'Kabupaten Supiori\r'),
-(94, 9428, 'Kabupaten Mamberamo Raya\r'),
-(94, 9429, 'Kabupaten Nduga\r'),
-(94, 9430, 'Kabupaten Lanny Jaya\r'),
-(94, 9431, 'Kabupaten Mamberamo Tengah\r'),
-(94, 9432, 'Kabupaten Yalimo\r'),
-(94, 9433, 'Kabupaten Puncak\r'),
-(94, 9434, 'Kabupaten Dogiyai\r'),
-(94, 9435, 'Kabupaten Intan Jaya\r'),
-(94, 9436, 'Kabupaten Deiyai\r'),
-(94, 9471, 'Kota Jayapura \r'),
 (11, 1101, 'Kabupaten Simeulue\r'),
 (11, 1102, 'Kabupaten Aceh Singkil\r'),
 (11, 1103, 'Kabupaten Aceh Selatan\r'),
@@ -1639,7 +1140,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (12, 1214, 1214062, 'Mazo\r'),
 (12, 1214, 1214063, 'Umbunasi\r'),
 (12, 1214, 1214070, 'Lolomatua\r'),
-(12, 1214, 1214080, 'Lolowa''U\r'),
+(12, 1214, 1214080, 'Lolowa\'U\r'),
 (12, 1214, 1214081, 'Hilimegai\r'),
 (12, 1215, 1215010, 'Pakkat\r'),
 (12, 1215, 1215020, 'Onan Ganjang\r'),
@@ -5194,7 +4695,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (52, 5204, 5204132, 'Maronge\r'),
 (52, 5204, 5204140, 'Empang\r'),
 (52, 5204, 5204141, 'Tarano\r'),
-(52, 5205, 5205010, 'Hu''U\r'),
+(52, 5205, 5205010, 'Hu\'U\r'),
 (52, 5205, 5205011, 'Pajo\r'),
 (52, 5205, 5205020, 'Dompu\r'),
 (52, 5205, 5205030, 'Woja\r'),
@@ -5319,7 +4820,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (53, 5304, 5304081, 'Fautmolo\r'),
 (53, 5304, 5304082, 'Fatukopa\r'),
 (53, 5304, 5304090, 'Kie\r'),
-(53, 5304, 5304091, 'Kot''Olin\r'),
+(53, 5304, 5304091, 'Kot\'Olin\r'),
 (53, 5304, 5304100, 'Amanatun Selatan\r'),
 (53, 5304, 5304101, 'Boking\r'),
 (53, 5304, 5304102, 'Nunkolo\r'),
@@ -5693,7 +5194,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (61, 6112, 6112010, 'Batu Ampar\r'),
 (61, 6112, 6112020, 'Terentang\r'),
 (61, 6112, 6112030, 'Kubu\r'),
-(61, 6112, 6112040, 'Telok Pa''Kedai\r'),
+(61, 6112, 6112040, 'Telok Pa\'Kedai\r'),
 (61, 6112, 6112050, 'Sungai Kakap\r'),
 (61, 6112, 6112060, 'Rasau Jaya\r'),
 (61, 6112, 6112070, 'Sungai Raya\r'),
@@ -6192,7 +5693,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (71, 7104, 7104041, 'Beo Utara\r'),
 (71, 7104, 7104042, 'Beo Selatan\r'),
 (71, 7104, 7104050, 'Rainis\r'),
-(71, 7104, 7104051, 'Tampa Na''Mma\r'),
+(71, 7104, 7104051, 'Tampa Na\'Mma\r'),
 (71, 7104, 7104052, 'Pulutan\r'),
 (71, 7104, 7104060, 'Essang\r'),
 (71, 7104, 7104061, 'Essang Selatan\r'),
@@ -6472,7 +5973,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7303, 7303020, 'Bantaeng\r'),
 (73, 7303, 7303021, 'Eremerasa\r'),
 (73, 7303, 7303030, 'Tompobulu\r'),
-(73, 7303, 7303031, 'Pa''Jukukang\r'),
+(73, 7303, 7303031, 'Pa\'Jukukang\r'),
 (73, 7303, 7303032, 'Gantarangkeke\r'),
 (73, 7304, 7304010, 'Bangkala\r'),
 (73, 7304, 7304011, 'Bangkala Barat\r'),
@@ -6545,7 +6046,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7309, 7309051, 'Tondong Tallasa\r'),
 (73, 7309, 7309060, 'Bungoro\r'),
 (73, 7309, 7309070, 'Labakkang\r'),
-(73, 7309, 7309080, 'Ma''Rang\r'),
+(73, 7309, 7309080, 'Ma\'Rang\r'),
 (73, 7309, 7309091, 'Segeri\r'),
 (73, 7309, 7309092, 'Mandalle\r'),
 (73, 7310, 7310010, 'Tanete Riaja\r'),
@@ -6713,7 +6214,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7326, 7326100, 'Tikala\r'),
 (73, 7326, 7326110, 'Sesean\r'),
 (73, 7326, 7326120, 'Balusu\r'),
-(73, 7326, 7326130, 'Sa''Dan\r'),
+(73, 7326, 7326130, 'Sa\'Dan\r'),
 (73, 7326, 7326140, 'Bengkelekila\r'),
 (73, 7326, 7326150, 'Sesean Suloara\r'),
 (73, 7326, 7326160, 'Kapala Pitu\r'),
@@ -8396,7 +7897,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (12, 1214, 1214062, 'Mazo\r'),
 (12, 1214, 1214063, 'Umbunasi\r'),
 (12, 1214, 1214070, 'Lolomatua\r'),
-(12, 1214, 1214080, 'Lolowa''U\r'),
+(12, 1214, 1214080, 'Lolowa\'U\r'),
 (12, 1214, 1214081, 'Hilimegai\r'),
 (12, 1215, 1215010, 'Pakkat\r'),
 (12, 1215, 1215020, 'Onan Ganjang\r'),
@@ -11951,7 +11452,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (52, 5204, 5204132, 'Maronge\r'),
 (52, 5204, 5204140, 'Empang\r'),
 (52, 5204, 5204141, 'Tarano\r'),
-(52, 5205, 5205010, 'Hu''U\r'),
+(52, 5205, 5205010, 'Hu\'U\r'),
 (52, 5205, 5205011, 'Pajo\r'),
 (52, 5205, 5205020, 'Dompu\r'),
 (52, 5205, 5205030, 'Woja\r'),
@@ -12076,7 +11577,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (53, 5304, 5304081, 'Fautmolo\r'),
 (53, 5304, 5304082, 'Fatukopa\r'),
 (53, 5304, 5304090, 'Kie\r'),
-(53, 5304, 5304091, 'Kot''Olin\r'),
+(53, 5304, 5304091, 'Kot\'Olin\r'),
 (53, 5304, 5304100, 'Amanatun Selatan\r'),
 (53, 5304, 5304101, 'Boking\r'),
 (53, 5304, 5304102, 'Nunkolo\r'),
@@ -12449,7 +11950,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (61, 6112, 6112010, 'Batu Ampar\r'),
 (61, 6112, 6112020, 'Terentang\r'),
 (61, 6112, 6112030, 'Kubu\r'),
-(61, 6112, 6112040, 'Telok Pa''Kedai\r'),
+(61, 6112, 6112040, 'Telok Pa\'Kedai\r'),
 (61, 6112, 6112050, 'Sungai Kakap\r'),
 (61, 6112, 6112060, 'Rasau Jaya\r'),
 (61, 6112, 6112070, 'Sungai Raya\r'),
@@ -12949,7 +12450,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (71, 7104, 7104041, 'Beo Utara\r'),
 (71, 7104, 7104042, 'Beo Selatan\r'),
 (71, 7104, 7104050, 'Rainis\r'),
-(71, 7104, 7104051, 'Tampa Na''Mma\r'),
+(71, 7104, 7104051, 'Tampa Na\'Mma\r'),
 (71, 7104, 7104052, 'Pulutan\r'),
 (71, 7104, 7104060, 'Essang\r'),
 (71, 7104, 7104061, 'Essang Selatan\r'),
@@ -13229,7 +12730,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7303, 7303020, 'Bantaeng\r'),
 (73, 7303, 7303021, 'Eremerasa\r'),
 (73, 7303, 7303030, 'Tompobulu\r'),
-(73, 7303, 7303031, 'Pa''Jukukang\r'),
+(73, 7303, 7303031, 'Pa\'Jukukang\r'),
 (73, 7303, 7303032, 'Gantarangkeke\r'),
 (73, 7304, 7304010, 'Bangkala\r'),
 (73, 7304, 7304011, 'Bangkala Barat\r'),
@@ -13302,7 +12803,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7309, 7309051, 'Tondong Tallasa\r'),
 (73, 7309, 7309060, 'Bungoro\r'),
 (73, 7309, 7309070, 'Labakkang\r'),
-(73, 7309, 7309080, 'Ma''Rang\r'),
+(73, 7309, 7309080, 'Ma\'Rang\r'),
 (73, 7309, 7309091, 'Segeri\r'),
 (73, 7309, 7309092, 'Mandalle\r'),
 (73, 7310, 7310010, 'Tanete Riaja\r'),
@@ -13470,7 +12971,7 @@ INSERT INTO `kec` (`id_prov`, `id_kabkot`, `id_kec`, `nama_kec`) VALUES
 (73, 7326, 7326100, 'Tikala\r'),
 (73, 7326, 7326110, 'Sesean\r'),
 (73, 7326, 7326120, 'Balusu\r'),
-(73, 7326, 7326130, 'Sa''Dan\r'),
+(73, 7326, 7326130, 'Sa\'Dan\r'),
 (73, 7326, 7326140, 'Bengkelekila\r'),
 (73, 7326, 7326150, 'Sesean Suloara\r'),
 (73, 7326, 7326160, 'Kapala Pitu\r'),
@@ -14677,39 +14178,6 @@ INSERT INTO `prov` (`id_prov`, `nama_prov`) VALUES
 (81, 'Maluku\r'),
 (82, 'Maluku Utara\r'),
 (91, 'Papua Barat\r'),
-(94, 'Papua\r'),
-(11, 'Aceh\r'),
-(12, 'Sumatera Utara\r'),
-(13, 'Sumatera Barat\r'),
-(14, 'Riau\r'),
-(15, 'Jambi\r'),
-(16, 'Sumatera Selatan\r'),
-(17, 'Bengkulu\r'),
-(18, 'Lampung\r'),
-(19, 'Kepulauan Bangka Belitung\r'),
-(21, 'Kepulauan Riau\r'),
-(31, 'DKI Jakarta'),
-(32, 'Jawa Barat\r'),
-(33, 'Jawa Tengah\r'),
-(34, 'DI Yogyakarta'),
-(35, 'Jawa Timur\r'),
-(36, 'Banten\r'),
-(51, 'Bali\r'),
-(52, 'Nusa Tenggara Barat\r'),
-(53, 'Nusa Tenggara Timur\r'),
-(61, 'Kalimantan Barat\r'),
-(62, 'Kalimantan Tengah\r'),
-(63, 'Kalimantan Selatan\r'),
-(64, 'Kalimantan Timur\r'),
-(71, 'Sulawesi Utara\r'),
-(72, 'Sulawesi Tengah\r'),
-(73, 'Sulawesi Selatan\r'),
-(74, 'Sulawesi Tenggara\r'),
-(75, 'Gorontalo\r'),
-(76, 'Sulawesi Barat\r'),
-(81, 'Maluku\r'),
-(82, 'Maluku Utara\r'),
-(91, 'Papua Barat\r'),
 (94, 'Papua\r');
 
 -- --------------------------------------------------------
@@ -14733,35 +14201,53 @@ CREATE TABLE `santri` (
   `kota_atau_kabupaten` int(100) NOT NULL,
   `kecamatan` int(100) NOT NULL,
   `alamat` varchar(100) NOT NULL,
-  `status` int(1) NOT NULL
+  `status` int(1) NOT NULL,
+  `id_kec` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `santri`
 --
 
-INSERT INTO `santri` (`nis`, `nama`, `tempat_lahir`, `tanggal_lahir`, `nama_wali`, `telp`, `jenis_kelamin`, `sekolah`, `nama_komplek`, `kamar`, `provinsi`, `kota_atau_kabupaten`, `kecamatan`, `alamat`, `status`) VALUES
-(1211, '121', '12121', '2015-12-12', 'Ahmad Royhan', '14045', 'Laki-Laki', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'A10', 63, 6310, 6310040, 'Karang Ploso', 1),
-(1212, 'wq', '231', '2015-12-29', NULL, '982377', 'Perempuan', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'A10', 0, 0, 0, 'sdfw', 1),
-(1234, 'Abdul Jalil', 'Banyumas', '1900-12-19', 'supardi', '085654634524', 'Laki-Laki', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'A10', 36, 3601, 3601191, 'Aku dan Kamu', 1),
-(7779, 'M. Syauqi Hanif Ardani', 'Banyumas', '2015-12-12', 'Bejo', '12345678', 'Laki-Laki', 'UMM', 'Abu Bakar', 'A10', 51, 5106, 5106040, 'Purwokerto', 2),
-(12345, 'M. Syaiful', '', '0000-00-00', '', '098987876765', 'Laki-Laki', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'a2', 0, 0, 0, 'Rt 03, Rw 01, Ds. Padang senja', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user`
---
-
-CREATE TABLE `tbl_user` (
-  `id` int(3) NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `santri` (`nis`, `nama`, `tempat_lahir`, `tanggal_lahir`, `nama_wali`, `telp`, `jenis_kelamin`, `sekolah`, `nama_komplek`, `kamar`, `provinsi`, `kota_atau_kabupaten`, `kecamatan`, `alamat`, `status`, `id_kec`) VALUES
+(1211, 'Ahmad Ainul', '12121', '2015-12-12', 'Ahmad Royhan', '14045', 'Laki-Laki', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'A10', 51, 5104, 5104030, 'Karang Ploso', 1, 0),
+(1234, 'Abdul Jalil', 'Banyumas', '1900-12-19', 'supardi', '085654634524', 'Laki-Laki', 'UIN Maulana Malik Ibrahim Malang', 'Abu Bakar', 'A10', 36, 3604, 3604120, 'Aku dan Kamu', 1, 0),
+(7779, 'M. Syauqi Hanif Ardani', 'Banyumas', '2015-12-12', 'Bejo', '12345678', 'Laki-Laki', 'UMM', 'Abu Bakar', 'A10', 51, 5106, 5106040, 'Purwokerto', 2, 0),
+(2489023, 'Ahmad Haidar', 'BAnyumas', '2017-05-22', 'Suparjo', '086756373546', 'Perempuan', 'UIN Malang', 'Sholawat', 'aa2', 51, 5106, 5106020, 'Jl. Panjaitan 50', 2, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `data_kamar`
+--
+ALTER TABLE `data_kamar`
+  ADD PRIMARY KEY (`id_kamar`),
+  ADD KEY `nama_komplek` (`nama_komplek`),
+  ADD KEY `id_komplek` (`id_komplek`),
+  ADD KEY `id_komplek_2` (`id_komplek`);
+
+--
+-- Indexes for table `data_komplek`
+--
+ALTER TABLE `data_komplek`
+  ADD PRIMARY KEY (`id_komplek`),
+  ADD KEY `id_komplek` (`id_komplek`);
+
+--
+-- Indexes for table `kabkot`
+--
+ALTER TABLE `kabkot`
+  ADD PRIMARY KEY (`id_kabkot`),
+  ADD KEY `id_prov` (`id_prov`);
+
+--
+-- Indexes for table `kec`
+--
+ALTER TABLE `kec`
+  ADD KEY `id_kabkot` (`id_kabkot`),
+  ADD KEY `id_prov` (`id_prov`);
 
 --
 -- Indexes for table `logintb`
@@ -14770,20 +14256,48 @@ ALTER TABLE `logintb`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `tbl_user`
+-- Indexes for table `prov`
 --
-ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `prov`
+  ADD PRIMARY KEY (`id_prov`);
+
+--
+-- Indexes for table `santri`
+--
+ALTER TABLE `santri`
+  ADD PRIMARY KEY (`nis`),
+  ADD KEY `id_kec` (`id_kec`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT for table `data_kamar`
 --
-ALTER TABLE `tbl_user`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `data_kamar`
+  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `data_komplek`
+--
+ALTER TABLE `data_komplek`
+  MODIFY `id_komplek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `kabkot`
+--
+ALTER TABLE `kabkot`
+  ADD CONSTRAINT `kabkot_ibfk_1` FOREIGN KEY (`id_kabkot`) REFERENCES `kec` (`id_kabkot`);
+
+--
+-- Constraints for table `prov`
+--
+ALTER TABLE `prov`
+  ADD CONSTRAINT `prov_ibfk_1` FOREIGN KEY (`id_prov`) REFERENCES `kabkot` (`id_prov`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
