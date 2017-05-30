@@ -1,5 +1,6 @@
 <?php
-include("koneksi.php");
+// include("koneksi.php");
+include("class.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,22 +69,21 @@ include("koneksi.php");
 			<?php
 			$nis = $_GET['nis'];
 			
-			$sql = mysqli_query($koneksi, "SELECT * FROM santri WHERE nis='$nis'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: index.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
-			
 			if(isset($_GET['aksi']) == 'delete'){
-				$delete = mysqli_query($koneksi, "DELETE FROM santri WHERE nis='$nis'");
-				if($delete){
-					echo '<div class="alert alert-info">Data berhasil dihapus.</div>';
-
-				}else{
-					echo '<div class="alert alert-danger">Data gagal dihapus .</div>';
+				$objek->hapus_data($nis);
+				if ($objek) {
+					echo '<div class="alert alert-danger">Data berhasil dihapus.</div>';
+				} else {
+					echo '<div class="alert alert-info">Data gagal dihapus.</div>';
 				}
 			}
+			?>
+
+			<?php
+
+				$data_array = $objek->tampil_data_by_nis($nis);
+
+				foreach ($data_array as $row) {	
 			?>
 			
 			<table class="table table-striped">
@@ -131,36 +131,32 @@ include("koneksi.php");
 				<tr>
 					<th>Provinsi</th>
 					<?php
-							//mengambil nama-nama propinsi yang ada di database
-							$propinsi = mysqli_query($koneksi, "SELECT nama_prov from prov where id_prov = (select provinsi from santri where nis = '$nis')");
-							while($p = mysqli_fetch_array($propinsi)){
-							
+						$data_prov = $objek->tampil_data_propinsi_by_nis($nis);
+						foreach ($data_prov as $p) {
 							echo "<td>$p[nama_prov]</td>";
-							}
-							?>
+						}
+					?>
 					
 				</tr>
 				<tr>
 					<th>Kota / Kabupaten</th>
-					<?php
-							//mengambil nama-nama propinsi yang ada di database
-							$Kabupaten = mysqli_query($koneksi, "SELECT nama_kabkot from kabkot where id_kabkot = (select kota_atau_kabupaten from santri where nis = '$nis')");
-							while($k = mysqli_fetch_array($Kabupaten)){
-							
+					<?php					
+						$data_kabkot = $objek->tampil_data_kabkot_by_nis($nis);
+						foreach ($data_kabkot as $k) {
 							echo "<td>$k[nama_kabkot]</td>";
-							}
-							?>
+						}
+					?>
 				</tr>
 				<tr>
 					<th>Kecamatan</th>
 					<?php
-							//mengambil nama-nama propinsi yang ada di database
-							$kec = mysqli_query($koneksi, "SELECT nama_kec from kec where id_kec = (select kecamatan from santri where nis = '$nis')");
-							while($k = mysqli_fetch_array($kec)){
 							
-							echo "<td>$k[nama_kec]</td>";
-							}
-							?>
+						$data_kecamatan = $objek->tampil_data_kecamatan_by_nis($nis);
+						foreach ($data_kecamatan as $kc) {
+
+							echo "<td>$kc[nama_kec]</td>";
+						}
+					?>
 				</tr>
 				<tr>
 					<th>Alamat</th>
@@ -171,6 +167,10 @@ include("koneksi.php");
 					<td><?php if($row['status'] == 1){ echo '<span class="label label-success">Aktif</span>'; }else{ echo '<span class="label label-warning">Tidak Aktif</span>'; } ?></td>
 				</tr>
 			</table>
+
+			<?php
+				};
+			?>
 			
 			<a href="index.php" class="btn btn-warning"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Beranda</a>
 			<a href="edit.php?nis=<?php echo $row['nis']; ?>" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Data</a>
