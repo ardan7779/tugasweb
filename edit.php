@@ -1,5 +1,6 @@
 <?php
-include("koneksi.php");
+// include("koneksi.php");
+include("class.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,12 +97,13 @@ $(document).ready(function(){
 			
 			<?php
 			$nis = $_GET['nis'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM santri WHERE nis='$nis'");
-			if(mysqli_num_rows($sql) == 0){
+
+			$data_array = $objek->tampil_data_by_nis($nis);
+			if ($data_array == 0) {
 				header("Location: index.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
+			} else {
+				foreach ($data_array as $row) {
+			
 			if(isset($_POST['save'])){
 				
 				$nama		= $_POST['nama'];
@@ -119,11 +121,17 @@ $(document).ready(function(){
 				$alamat		= $_POST['alamat'];
 				$status		= $_POST['status'];
 				
-				$update = mysqli_query($koneksi, "UPDATE  santri SET nama='$nama', tempat_lahir='$tmp', tanggal_lahir='$tgl', jenis_kelamin = '$jk', telp = '$telp', sekolah = '$sekolah', nama_komplek = '$nama_komplek', nama_wali = '$nama_wali', kamar = '$kamar', provinsi = '$provinsi', kota_atau_kabupaten = '$kota_atau_kabupaten', kecamatan = '$kecamatan', alamat = '$alamat', status='$status' WHERE nis = '$nis'") or die(mysqli_error());
-				if($update){
+				try {
+
+					$update = $objek->ubah_data($nama, $tmp, $tgl, $jk, $telp, $sekolah, $nama_komplek, $nama_wali, $kamar, $provinsi, $kota_atau_kabupaten, $kecamatan, $alamat, $status, $nis);
+
 					header("Location: edit.php?nis=".$nis."&pesan=sukses");
-				}else{
+						
+				} catch (Exception $e) {
+					
 					echo '<div class="alert alert-danger">Data gagal disimpan, silahkan coba lagi.</div>';
+					echo $e;
+				
 				}
 			}
 			
@@ -135,7 +143,7 @@ $(document).ready(function(){
 				<div class="form-group">
 					<label class="col-sm-3 control-label">NIS</label>
 					<div class="col-sm-2">
-						<input type="text" name="nis" class="form-control" value="<?php echo $row['nis']; ?>" placeholder="NIS" disabled>
+						<input type="text" name="niss" class="form-control" value="<?php echo $row['nis']; ?>" placeholder="NIS" disabled>
 					</div>
 				</div>
 				<div class="form-group">
@@ -192,10 +200,11 @@ $(document).ready(function(){
 						<select name="provinsi" id="propinsi"class="form-control" required>
 							<option value=''>PROVINSI</option>
 							<?php
-							//mengambil nama-nama propinsi yang ada di database
-							$propinsi = mysqli_query($koneksi, "SELECT * FROM prov ORDER BY nama_prov");
-							while($p = mysqli_fetch_array($propinsi)){
-							echo "<option value='$p[id_prov]'>$p[nama_prov]</option>\n";
+
+							$data_array = $objek->tampil_data_profinsi();
+
+							foreach ($data_array as $p) {
+								echo "<option value='$p[id_prov]'>$p[nama_prov]</option>\n";
 							}
 							?>
 						</select>
@@ -207,11 +216,13 @@ $(document).ready(function(){
 						<select name="kota" id="kota" class="form-control" required>
 							<option >KABUPATEN / KOTA</option>
 							<?php
-							//mengambil nama-nama propinsi yang ada di database
-							$kota = mysqli_query($koneksi, "SELECT * FROM kabkot ORDER BY nama_kabkot");
-							while($p=mysqli_fetch_array($propinsi)){
-							echo "<option value=\"$p[id_kabkot]\">$p[nama_kabkot]</option>\n";
+
+							$data_array = $objek->tampil_data_kabkot();
+
+							foreach ($data_array as $p) {
+								echo "<option value=\"$p[id_kabkot]\">$p[nama_kabkot]</option>\n";
 							}
+
 							?>
 
 						</select>
@@ -263,6 +274,11 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</form>
+
+			<?php 
+					}
+				}
+			 ?>>
 		</div>
 	</div>
 	<div class="row-fluid">
