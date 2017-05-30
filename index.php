@@ -1,5 +1,6 @@
 <?php
-include("koneksi.php");
+// include("koneksi.php");
+include("class.php");
  session_start();
       if(empty($_SESSION['username'])){
         header("location: login.php");
@@ -91,17 +92,14 @@ include("koneksi.php");
 			<?php
 			if(isset($_GET['aksi']) == 'delete'){
 				$nis = $_GET['nis'];
-				$cek = mysqli_query($koneksi, "SELECT * FROM santri WHERE nis='$nis'");
-				if(mysqli_num_rows($cek) == 0){
-					echo '<div class="alert alert-info">Data tidak ditemukan.</div>';
-				}else{
-					$delete = mysqli_query($koneksi, "DELETE FROM santri WHERE nis='$nis'");
-					if($delete){
-						echo '<div class="alert alert-danger">Data berhasil dihapus.</div>';
-					}else{
-						echo '<div class="alert alert-info">Data gagal dihapus.</div>';
-					}
+				
+				$objek->hapus_data($nis);
+				if ($objek) {
+					echo '<div class="alert alert-danger">Data berhasil dihapus.</div>';
+				} else {
+					echo '<div class="alert alert-info">Data gagal dihapus.</div>';
 				}
+
 			}
 			?>
 			
@@ -132,15 +130,13 @@ include("koneksi.php");
 				</tr>
 				<?php
 				if($urut){
-					$sql = mysqli_query($koneksi, "SELECT * FROM santri WHERE status='$urut' ORDER BY nis ASC");
+					$data_array = $objek->tampil_data_by_status($urut);
 				}else{
-					$sql = mysqli_query($koneksi, "SELECT * FROM santri ORDER BY nis ASC");
+					$data_array = $objek->tampil_data();
 				}
-				if(mysqli_num_rows($sql) == 0){
-					echo '<tr><td colspan="8">Tidak ada data.</td></tr>';
-				}else{
 					$no = 1;
-					while($row = mysqli_fetch_assoc($sql)){
+					foreach ($data_array as $row) {
+						
 						echo '
 						<tr>
 							<td>'.$no.'</td>
@@ -169,7 +165,8 @@ include("koneksi.php");
 						';
 						$no++;
 					}
-				}
+				// 	}
+				// }
 				?>
 			</table>
 			</div>
